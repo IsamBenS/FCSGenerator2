@@ -1,5 +1,6 @@
 # FCSGenerator2
-Shiny App meant to generate highly customizable FCS files from scratch or use cytometry data to generate "ground truth" files which can then be used as a reference when benchmarking alrogithms.
+Shiny App meant to generate highly customizable FCS files from scratch or use cytometry data to generate "ground truth" files 
+which can then be used as a reference when benchmarking alrogithms.
  
 	
 ## Requirements
