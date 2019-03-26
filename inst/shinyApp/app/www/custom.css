@@ -1,0 +1,9 @@
+div#shiny-notification-panel {
+    width:40vw;
+    margin-left:30vw;
+    height:200px;
+    font-size:30px;
+    top:50%;
+    right:30%;
+    overflow:auto;
+}

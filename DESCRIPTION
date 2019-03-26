@@ -1,0 +1,14 @@
+Package: FCSGenerator2
+Type: Package
+Title: FCS Generator 2
+Version: 1.0.0
+Author: Isam Ben Soltane
+Maintainer: <isam.ben-soltane@inserm.fr>
+Description: Shiny App meant to generate highly customizable FCS files from scratch or use cytometry data to generate "ground truth" files 
+which can then be used as a reference when benchmarking alrogithms.
+License: ?
+Encoding: UTF-8
+LazyData: true
+Depends: R (>= 3.1.0), shiny, shinydashboard, shinyjs, flowCore, ggplot2, d3r, reshape2, ggridges, truncnorm, sunburstR, heatmaply, shinyHeatmaply
+        Biobase
+Packaged: 2019-03-26 09:52:20 UTC;
