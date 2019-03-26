@@ -11,10 +11,11 @@ which can then be used as a reference when benchmarking alrogithms.
 
   1. Run the following command in R/RStudio:
 ```
-install.packages(c("shiny", "shinyjs", "shinydashboard", "ggplot2", "d3r", "reshape2", "ggridges", "truncnorm", "sunburstR", "heatmaply", "shinyHeatmaply"))
 source("https://bioconductor.org/biocLite.R")
 biocLite("Biobase")
 biocLite("flowCore")
+install.packages(c("shiny", "shinyjs", "shinydashboard", "ggplot2", "d3r", "reshape2", "ggridges", "truncnorm", "sunburstR", "heatmaply", "shinyHeatmaply"))
+
 ```
   >You may be asked to reload your environment, if so, accept.
   
