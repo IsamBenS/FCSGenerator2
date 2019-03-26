@@ -8,6 +8,5 @@ Description: Shiny App meant to generate highly customizable FCS files from scra
 License: ?
 Encoding: UTF-8
 LazyData: true
-Depends: R (>= 3.1.0), shiny, shinydashboard, shinyjs, flowCore, ggplot2, d3r, reshape2, ggridges, truncnorm, sunburstR, heatmaply, shinyHeatmaply
-        Biobase
+Depends: R (>= 3.1.0), shiny, shinydashboard, shinyjs, flowCore, ggplot2, d3r, reshape2, ggridges, truncnorm, sunburstR, heatmaply, shinyHeatmaply, Biobase
 Packaged: 2019-03-26 09:52:20 UTC;
