@@ -1,10 +1,10 @@
 ui <- dashboardPage(
-
+    
     dashboardHeader
     (
         title="FCS Generator 2"
     ),
-
+    
     dashboardSidebar
     (
         sidebarMenu
@@ -13,8 +13,8 @@ ui <- dashboardPage(
             menuItem("Add Files", tabName="t_1"),
             menuItem("Compensate & Transform", tabName="t_8"),
             menuItem("Modify Cohort", tabName="t_cohort",
-                     menuSubItem("Generate Control Files", tabName = "t_3"),
-                     menuSubItem("Generate Mutants", tabName = "t_6")),
+                     menuSubItem("Generate Mutants", tabName = "t_6"),
+                     menuSubItem("Generate Copies", tabName = "t_3")),
             menuItem("Modify Populations", tabName="t_2"),
             menuItem("Mix Files", tabName = "t_7"),
             menuItem("Visualize Populations", tabName = "t_4",
@@ -22,11 +22,11 @@ ui <- dashboardPage(
                      menuSubItem("Histograms", tabName = "t_4_hist"),
                      menuSubItem("Joyplots", tabName = "t_4_jp")),
             menuItem("Decompensate & Detransform", tabName="t_9"),
-            menuItem("Download Files", tabName = "t_5"),
+            menuItem("Download And Save Files", tabName = "t_5"),
             menuItem("Log", tabName = "t_10")
         )
     ),
-
+    
     dashboardBody
     (
         useShinyjs(),
@@ -85,6 +85,27 @@ ui <- dashboardPage(
                                         #actionButton("t_1_compensate", "Compensate Selection", width="100%")
                                     )
                                 )
+                            ),
+                            tabPanel
+                            (
+                                title="Load METADATA Folder",value="C",
+                                fluidRow
+                                (
+                                    column
+                                    (
+                                        width=5,
+                                        column
+                                        (
+                                            width=9,
+                                            selectInput("t_1_metadata_sel", NULL, width="100%", choices=NULL)
+                                        ),
+                                        column
+                                        (
+                                            width=3,
+                                            actionButton("t_1_metadata_load", "Load", width = "100%")
+                                        )
+                                    )
+                                )
                             )
                         ),
                         # column
@@ -95,7 +116,7 @@ ui <- dashboardPage(
                         #         tableOutput("t_1_fileInfo"),
                         #         style="overflow:auto;max-width:50vw"
                         #     ),
-                        #
+                        #     
                         #     style="overflow:auto;max-width:50vw"
                         # ),
                         column
@@ -105,7 +126,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_2",style="overflow:auto",
@@ -214,14 +235,14 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_3",
                     column(width=2),
                     shinydashboard::box
                     (
-                        width=8,title="GENERATE CONTROL FILES",solidHeader=T,status="info",
+                        width=8,title="GENERATE COPIES",solidHeader=T,status="info",
                         column
                         (
                             width=12, style="height:30vh;padding-top:2%",
@@ -259,7 +280,7 @@ ui <- dashboardPage(
                     ),
                     column(width=2)
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_6",
@@ -278,7 +299,7 @@ ui <- dashboardPage(
                         uiOutput("t_6_1")
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_7",
@@ -332,7 +353,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_4_hm",
@@ -384,7 +405,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_4_hist",
@@ -415,7 +436,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_4_jp",
@@ -445,7 +466,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_5",
@@ -494,17 +515,47 @@ ui <- dashboardPage(
                             solidHeader=T,
                             uiOutput("t_5_mut_list")
                         ),
-                        shinydashboard::box
+                        column
                         (
-                            width=2,solidHeader=T,status="info",
-                            title="OPTIONS",
-                            selectInput("t_5_set_list", "Select a Cohort", choices=NULL),
-                            checkboxInput("t_5_all", "Select all"),
-                            downloadButton("t_5_dl", "Download Selection")
+                            width=2,
+                            shinydashboard::box
+                            (
+                                width=12,solidHeader=T,status="info",
+                                title="DOWNLOAD OPTIONS",
+                                selectInput("t_5_set_list", "Select a Cohort", choices=NULL),
+                                checkboxInput("t_5_all", "Select all"),
+                                downloadButton("t_5_dl", "Download Selection")
+                            ),
+                            shinydashboard::box
+                            (
+                                width=12,solidHeader=T,status="info",
+                                title="SAVE OPTIONS",
+                                style="margin-top:5vh",
+                                column
+                                (
+                                    width=12,
+                                    dateInput("date", "Date", value = Sys.Date(), width = "100%", format = "yy-M-dd"),
+                                    textInput("experiments", "Experiment", width = "100%",value="Output"),
+                                    selectInput("user", "Author",
+                                                choices = list("IB","HL","PG","MM","LH","QB","TH","CSM","EG","FC","MMz","KD","TL"), 
+                                                width = "100%"),
+                                    selectInput("panel", "Panel", 
+                                                choices = list("CYTO-P01A","CYTO-P01B","CYTO-P01C","CYTO-P01D","CYTO-P02A","CYTO-P03A",
+                                                               "CYTO-P04B","CYTO-P12","CYTO-P13A","CYTO-P15H","CYTO-P15B","CYTO-P15G",
+                                                               "CYTO-P16C","CYTO-P16C","CYTO-P18F","IMPC1","IMPC2","NONE"),
+                                                width = "100%"),
+                                    textInput("version", "Version (opt.)", width = "100%",value="1")
+                                ),
+                                column
+                                (
+                                    width=12,
+                                    actionButton("t_5_metadata_save", "Save on Server", width="100%")
+                                )
+                            )
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_8",
@@ -547,7 +598,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_9",
@@ -590,7 +641,7 @@ ui <- dashboardPage(
                         )
                     )
                 ),
-
+                
                 tabItem
                 (
                     tabName="t_10",
@@ -602,7 +653,7 @@ ui <- dashboardPage(
                 )
             )
         )
-
+        
     )
-
+    
 )
