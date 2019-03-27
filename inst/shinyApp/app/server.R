@@ -19,7 +19,7 @@ server <- function(input, output, session)
     
     env.var <- reactiveValues(
         exp.folder = "/media/data/html/INPUT/",
-        tool.wd = getwd() #system.file("shinyApp", "app", package = "FCSGenerator2")
+        tool.wd = system.file("shinyApp", "app", package = "FCSGenerator2")
     )
     
     
@@ -3205,93 +3205,6 @@ server <- function(input, output, session)
             delay(500, shinyjs::enable("t_5_dl"))
         }
     )
-    
-    observeEvent(input$t_5_metadata_save,
-    {
-        shinyjs::disable("t_5_dl")
-        files.names <- c()
-        files.groups <- c()
-        nmb.files <- 0
-        meta.data.matrix <- NULL
-        meta.data.name <- NULL
-        
-        progress <- Progress$new()
-        progress$set("Saving Files On Server", value=0)
-        
-        if(length(app.variables$fcs.files)>0 && length(app.variables$sets.list)>0) 
-        {
-            for(i in 1:length(app.variables$fcs.files))
-            {
-                if(length(app.variables$fcs.files[[i]])>0 && length(input[[paste0("t_5_",i,"_cb")]])>0 &&
-                   !is.na(input[[paste0("t_5_",i,"_cb")]]))
-                {
-                    if(input[[paste0("t_5_",i,"_cb")]])
-                    {
-                        nmb.files <- nmb.files+1
-                    }
-                }
-            }
-        }
-        
-        progress$inc(1/(nmb.files+2), detail=paste0(nmb.files, " files detected"))
-        
-        if(length(app.variables$fcs.files)>0 && length(app.variables$sets.list)>0 &&
-           !is.na(input$experiments) && input$experiments!="") 
-        {
-            exp <- input$experiments
-            for(i in 1:length(app.variables$fcs.files))
-            {
-                if(length(app.variables$fcs.files[[i]])>0 && length(input[[paste0("t_5_",i,"_cb")]])>0 &&
-                   !is.na(input[[paste0("t_5_",i,"_cb")]]))
-                {
-                    if(input[[paste0("t_5_",i,"_cb")]])
-                    {
-                        meta.data.name <- 
-                            paste0(format(input$date, "%y-%b-%d"),"_",exp,"_",input$panel,"_",input$user)
-                        if(nchar(input$version)>1 && !is.null(input$version))
-                        {
-                            meta.data.name <- paste0(name,"_",input$version) 
-                        }
-                        tmp.dir <- paste0(env.var$exp.folder, "/DATA/")
-                        if(!(dir.exists(paste0(tmp.dir,"/",meta.data.name,"/"))))
-                        {
-                            dir.create(paste0(tmp.dir,"/",meta.data.name,"/")) 
-                        }
-                        tmp.dir <- paste0(tmp.dir,"/",meta.data.name,"/") 
-                        #==
-                        fcs <- app.variables$fcs.files[[i]][["file"]]
-                        fcs@exprs <- app.variables$output.matrices[[i]][app.variables$used.events[[i]],]
-                        if(app.variables$fcs.files[[i]][["type"]]=="MUT")
-                        {
-                            tmp.name <- paste0(tmp.dir,"/",app.variables$fcs.files[[i]][["name"]],".fcs")
-                            write.FCS(fcs, tmp.name)
-                            files.names <- c(unlist(files.names), tmp.name) 
-                            files.groups <- c(unlist(files.groups), app.variables$fcs.files[[i]][["type"]]) 
-                        }
-                        else
-                        {
-                            tmp.name <- paste0(tmp.dir,"/",app.variables$fcs.files[[i]][["name"]],".fcs")
-                            write.FCS(fcs, tmp.name)
-                            files.names <- c(unlist(files.names), tmp.name) 
-                            files.groups <- c(unlist(files.groups), app.variables$fcs.files[[i]][["type"]]) 
-                        }
-                        progress$inc(1/(nmb.files+2), detail=paste0(app.variables$fcs.files[[i]][["name"]], " added to METADATA list"))
-                    }
-                }
-            }
-            meta.data.matrix <- matrix(nrow = nmb.files, ncol = 2)
-            colnames(meta.data.matrix) <- c("filesnames","GROUP")
-            meta.data.matrix[,1] <- unlist(files.names)
-            meta.data.matrix[,2] <- unlist(files.groups)
-            
-            write.csv(meta.data.matrix, paste0(env.var$exp.folder, "/METADATA/", meta.data.name, "_MetaData.csv"), row.names = F)
-        }
-        progress$inc(1/(nmb.files+2), detail="METADATA file generated")
-        progress$set("Files Saved On Server", value=1)
-        
-        delay(500, progress$close())
-        delay(500, shinyjs::enable("t_5_dl"))
-    })
     
     
     

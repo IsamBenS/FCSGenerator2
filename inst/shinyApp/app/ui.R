@@ -22,7 +22,7 @@ ui <- dashboardPage(
                      menuSubItem("Histograms", tabName = "t_4_hist"),
                      menuSubItem("Joyplots", tabName = "t_4_jp")),
             menuItem("Decompensate & Detransform", tabName="t_9"),
-            menuItem("Download And Save Files", tabName = "t_5"),
+            menuItem("Download Files", tabName = "t_5"),
             menuItem("Log", tabName = "t_10")
         )
     ),
@@ -83,27 +83,6 @@ ui <- dashboardPage(
                                         width=4,
                                         actionButton("t_1_select", "Add Files", width="100%")
                                         #actionButton("t_1_compensate", "Compensate Selection", width="100%")
-                                    )
-                                )
-                            ),
-                            tabPanel
-                            (
-                                title="Load METADATA Folder",value="C",
-                                fluidRow
-                                (
-                                    column
-                                    (
-                                        width=5,
-                                        column
-                                        (
-                                            width=9,
-                                            selectInput("t_1_metadata_sel", NULL, width="100%", choices=NULL)
-                                        ),
-                                        column
-                                        (
-                                            width=3,
-                                            actionButton("t_1_metadata_load", "Load", width = "100%")
-                                        )
                                     )
                                 )
                             )
@@ -525,32 +504,6 @@ ui <- dashboardPage(
                                 selectInput("t_5_set_list", "Select a Cohort", choices=NULL),
                                 checkboxInput("t_5_all", "Select all"),
                                 downloadButton("t_5_dl", "Download Selection")
-                            ),
-                            shinydashboard::box
-                            (
-                                width=12,solidHeader=T,status="info",
-                                title="SAVE OPTIONS",
-                                style="margin-top:5vh",
-                                column
-                                (
-                                    width=12,
-                                    dateInput("date", "Date", value = Sys.Date(), width = "100%", format = "yy-M-dd"),
-                                    textInput("experiments", "Experiment", width = "100%",value="Output"),
-                                    selectInput("user", "Author",
-                                                choices = list("IB","HL","PG","MM","LH","QB","TH","CSM","EG","FC","MMz","KD","TL"), 
-                                                width = "100%"),
-                                    selectInput("panel", "Panel", 
-                                                choices = list("CYTO-P01A","CYTO-P01B","CYTO-P01C","CYTO-P01D","CYTO-P02A","CYTO-P03A",
-                                                               "CYTO-P04B","CYTO-P12","CYTO-P13A","CYTO-P15H","CYTO-P15B","CYTO-P15G",
-                                                               "CYTO-P16C","CYTO-P16C","CYTO-P18F","IMPC1","IMPC2","NONE"),
-                                                width = "100%"),
-                                    textInput("version", "Version (opt.)", width = "100%",value="1")
-                                ),
-                                column
-                                (
-                                    width=12,
-                                    actionButton("t_5_metadata_save", "Save on Server", width="100%")
-                                )
                             )
                         )
                     )
