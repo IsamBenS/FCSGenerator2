@@ -63,7 +63,6 @@ ui <- dashboardPage(
                                         width=3,
                                         numericInput("t_1_nmb_rare_populations", "Number of Rare Populations", value=0),
                                         numericInput("t_1_freq_rare_populations", "Total Frequency (Rare Populations)", value=0),
-                                        checkboxInput("t_1_transformed", "Transformed (logicle)", value=T),
                                         actionButton("t_1_create", "Generate", width="100%")
                                     ),
                                     column
@@ -82,22 +81,10 @@ ui <- dashboardPage(
                                     (
                                         width=4,
                                         actionButton("t_1_select", "Add Files", width="100%")
-                                        #actionButton("t_1_compensate", "Compensate Selection", width="100%")
                                     )
                                 )
                             )
                         ),
-                        # column
-                        # (
-                        #     width=4, style="max-height:23vh",
-                        #     fluidRow
-                        #     (
-                        #         tableOutput("t_1_fileInfo"),
-                        #         style="overflow:auto;max-width:50vw"
-                        #     ),
-                        #     
-                        #     style="overflow:auto;max-width:50vw"
-                        # ),
                         column
                         (
                             width=12,
@@ -118,9 +105,6 @@ ui <- dashboardPage(
                             column
                             (
                                 width=6, style="max-height:36vh;overflow:auto;",
-                                div(
-                                    selectInput("t_2_set_list", "Select a Cohort", choices=NULL)
-                                ),
                                 div(
                                     selectInput("t_2_file_list", "Select a File", choices=NULL)
                                 ),
@@ -225,7 +209,6 @@ ui <- dashboardPage(
                         column
                         (
                             width=12, style="height:30vh;padding-top:2%",
-                            selectInput("t_3_set_list", "Select a Cohort", choices=NULL),
                             selectInput("t_3_file_list", "Select a File", choices=NULL)
                         ),
                         column
@@ -267,7 +250,6 @@ ui <- dashboardPage(
                     (
                         title="OPTIONS",solidHeader=T,status="info",
                         width=3, style="max-height:40vh;padding-top:7%;overflow:auto",
-                        selectInput("t_6_set_list", "Select a Cohort", choices=NULL),
                         selectInput("t_6_files_list", "Select a Control File", choices=NULL),
                         actionButton("t_6_mut_add", "Add All Mutants", width="50%", style="margin-left:25%"),
                         actionButton("t_6_mut_generate", "Modify Mutants", width="50%", style="margin-left:25%")
@@ -289,7 +271,6 @@ ui <- dashboardPage(
                         (
                             width=12,solidHeader=T,status="info",
                             title="FILES SELECTION",
-                            selectInput("t_7_set_list", "Select a Cohort", choices=NULL),
                             selectInput("t_7_source_list", "MOVE FROM...", choices=NULL),
                             selectInput("t_7_target_list", "...TO", choices=NULL)
                         ),
@@ -342,7 +323,6 @@ ui <- dashboardPage(
                         title="OPTIONS",
                         status="info",
                         solidHeader=T,
-                        selectInput("t_4_hm_set_list", "Select a Cohort", choices=NULL),
                         selectInput("t_4_hm_file_list", "Select 1st File", choices=NULL),
                         selectInput("t_4_hm_2_file_list", "Select 2nd File", choices=NULL),
                         selectInput("t_4_hm_markers_list", "Select Markers", choices=NULL, multiple = T)
@@ -394,7 +374,6 @@ ui <- dashboardPage(
                         title="OPTIONS",
                         status="info",
                         solidHeader=T,
-                        selectInput("t_4_hist_set_list", "Select a Cohort", choices=NULL),
                         selectInput("t_4_hist_file_list", "Select 1st File", choices=NULL),
                         selectInput("t_4_hist_2_file_list", "Select 2nd File", choices=NULL)
                     ),
@@ -425,7 +404,6 @@ ui <- dashboardPage(
                         title="OPTIONS",
                         status="info",
                         solidHeader=T,
-                        selectInput("t_4_jp_set_list", "Select a Cohort", choices=NULL),
                         selectInput("t_4_jp_markers_list", "Select a Marker", choices=NULL)
                     ),
                     column
@@ -501,7 +479,6 @@ ui <- dashboardPage(
                             (
                                 width=12,solidHeader=T,status="info",
                                 title="DOWNLOAD OPTIONS",
-                                selectInput("t_5_set_list", "Select a Cohort", choices=NULL),
                                 checkboxInput("t_5_all", "Select all"),
                                 downloadButton("t_5_dl", "Download Selection")
                             )
@@ -524,7 +501,6 @@ ui <- dashboardPage(
                     shinydashboard::box
                     (
                         width=2,title="Select Files",solidHeader=T,status="info",
-                        selectInput("t_8_set_list", "Select a Cohort", choices=NULL),
                         fluidRow
                         (
                             column
@@ -567,7 +543,6 @@ ui <- dashboardPage(
                     shinydashboard::box
                     (
                         width=2,title="Select Files",solidHeader=T,status="info",
-                        selectInput("t_9_set_list", "Select a Cohort", choices=NULL),
                         fluidRow
                         (
                             column
