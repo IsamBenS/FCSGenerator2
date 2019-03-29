@@ -22,7 +22,7 @@ ui <- dashboardPage(
                      menuSubItem("Histograms", tabName = "t_4_hist"),
                      menuSubItem("Joyplots", tabName = "t_4_jp")),
             menuItem("Decompensate & Detransform", tabName="t_9"),
-            menuItem("Download Files", tabName = "t_5"),
+            menuItem("Download", tabName = "t_5"),
             menuItem("Log", tabName = "t_10")
         )
     ),

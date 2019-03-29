@@ -25,6 +25,7 @@ FCSGenerator2.run <- function()
     library(sunburstR)
     library(heatmaply)
     library(shinyHeatmaply)
+    library(tcltk)
 
     appDir <- system.file("shinyApp", "app", package = "FCSGenerator2")
     if (appDir == "")

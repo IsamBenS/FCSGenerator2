@@ -1,3 +1,4 @@
+Sys.setlocale('LC_ALL','C')
 server <- function(input, output, session)
 {
     useShinyjs()
@@ -18,7 +19,6 @@ server <- function(input, output, session)
     )
     
     env.var <- reactiveValues(
-        exp.folder = "/media/data/html/INPUT/",
         tool.wd = system.file("shinyApp", "app", package = "FCSGenerator2")
     )
     
@@ -187,7 +187,7 @@ server <- function(input, output, session)
         m[1,1] = "FlowFrames"
         m[1,2] = "*.csv;*.fcs"
         #==
-        temp.files <- choose.files(filters = m,multi = T)
+        temp.files <- tk_choose.files(filters = m,multi = T)
         
         if(length(temp.files) > 0)
         {
@@ -3084,6 +3084,7 @@ server <- function(input, output, session)
             }
             zip(file, files.names)
             file.remove(unlist(files.names))
+            file.remove(tmp.dir)
             progress$inc(1/(nmb.files+2), detail="Zip archive generated")
             progress$set("Zip ready", value=1)
             

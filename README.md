@@ -4,7 +4,7 @@ Shiny App meant to generate "ground truth" FCS files for benchmarking dimension 
 	
 ## Requirements
   * software: R(Version 3.5.1), Rstudio(optional)
-  * R packages: shiny, shinydashboard, shinyjs, flowCore, ggplot2, d3r, reshape2, ggridges, truncnorm, sunburstR, heatmaply, shinyHeatmaply
+  * R packages: shiny, shinydashboard, shinyjs, flowCore, ggplot2, d3r, reshape2, ggridges, truncnorm, sunburstR, heatmaply, shinyHeatmaply, tcltk
   
 ## Quick installation guide
 
@@ -13,7 +13,7 @@ Shiny App meant to generate "ground truth" FCS files for benchmarking dimension 
 source("https://bioconductor.org/biocLite.R")
 biocLite("Biobase")
 biocLite("flowCore")
-install.packages(c("shiny", "shinyjs", "shinydashboard", "ggplot2", "d3r", "reshape2", "ggridges", "truncnorm", "sunburstR", "heatmaply", "shinyHeatmaply"))
+install.packages(c("shiny", "shinyjs", "shinydashboard", "ggplot2", "d3r", "reshape2", "ggridges", "truncnorm", "sunburstR", "heatmaply", "shinyHeatmaply", "tcltk"))
 
 ```
   >You may be asked to reload your environment, if so, accept.
